@@ -9,8 +9,17 @@
 
 void parse_and_execute(stack_t **stack, char *line)
 {
-	char *opcode, *arg;
+	char *opcode;
 	int line_number = 0;
+	instruction_t *inst;
+
+	instruction_t instructions[] = {
+		{"push", push},
+		{"pall", pall},
+		{"pint", pint},
+		{"pop", pop},
+		{NULL, NULL}
+	};
 
 	if (!line)
 		return;
@@ -20,25 +29,17 @@ void parse_and_execute(stack_t **stack, char *line)
 	if (!opcode || opcode[0] == '#')
 		return;
 
-	arg = strtok(NULL, " \n");
 	line_number++;
 
-	if (strcmp(opcode, "push") == 0)
+	for (inst = instructions; inst->opcode != NULL; inst++)
 	{
-		if (!arg || !is_number(arg))
+		if (strcmp(opcode, inst->opcode) == 0)
 		{
-			fprintf(stderr, "L%d: usage: push integer\n", line_number);
-			exit(EXIT_FAILURE);
+			inst->f(stack, line_number);
+			return;
 		}
-		push(stack, line_number, arg);
 	}
-	else if (strcmp(opcode, "pall") == 0)
-		pall(stack);
-	else if (strcmp(opcode, "pint") == 0)
-		pint(stack, line_number);
-	else
-	{
-		fprintf(stderr, "L%d: unknown instruction %s\n", line_number, opcode);
-		exit(EXIT_FAILURE);
-	}
+
+	fprintf(stderr, "L%d: unknown instruction %s\n", line_number, opcode);
+	exit(EXIT_FAILURE);
 }

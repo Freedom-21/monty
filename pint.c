@@ -6,7 +6,7 @@
  * @line_number: Line number in the Monty bytecode file
  * Return: void
  */
-void pint(stack_t **stack, int line_number)
+void pint(stack_t **stack, unsigned int line_number)
 {
 	if (*stack == NULL)
 	{

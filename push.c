@@ -4,14 +4,14 @@
  * push - Pushes an element onto the stack
  * @stack: Double pointer to the head of the stack
  * @line_number: Line number in the Monty bytecode file
- * @arg: Argument (integer) to be pushed onto the stack
  * Return: void
  */
 
-void push(stack_t **stack, int line_number, char *arg)
+void push(stack_t **stack, unsigned int line_number)
 {
 	int value;
 	stack_t *new_node;
+	char *arg = strtok(NULL, " \n");
 
 	if (!arg)
 	{
