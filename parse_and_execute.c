@@ -12,7 +12,7 @@ void parse_and_execute(stack_t **stack, char *line)
 	char *opcode;
 	int line_number = 0;
 	instruction_t *inst;
-
+	int len;
 	instruction_t instructions[] = {
 		{"push", push},
 		{"pall", pall},
@@ -20,17 +20,19 @@ void parse_and_execute(stack_t **stack, char *line)
 		{"pop", pop},
 		{NULL, NULL}
 	};
-
 	if (!line)
 		return;
-
-	opcode = strtok(line, " \n");
-
+	while (*line && isspace(*line))
+		line++;
+	len = strlen(line);
+	while (len > 0 && isspace(line[len - 1]))
+		line[--len] = '\0';
+	if (strlen(line) == 0)
+		return;
+	opcode = strtok(line, " \t\n");
 	if (!opcode || opcode[0] == '#')
 		return;
-
 	line_number++;
-
 	for (inst = instructions; inst->opcode != NULL; inst++)
 	{
 		if (strcmp(opcode, inst->opcode) == 0)
@@ -39,7 +41,6 @@ void parse_and_execute(stack_t **stack, char *line)
 			return;
 		}
 	}
-
 	fprintf(stderr, "L%d: unknown instruction %s\n", line_number, opcode);
 	exit(EXIT_FAILURE);
 }
