@@ -4,7 +4,7 @@
  * pop - Removes the top element of the stack
  * @stack: Double pointer to the beginning of the stack
  *@line_number: Line number in the Monty bytecode file
- * Return: void
+ * Return: voi
  */
 void pop(stack_t **stack, unsigned int line_number)
 {
