@@ -5,7 +5,7 @@
  * Return: Exit with success
  */
 
-#define MAX_LINE_LENGTH 1024
+#define MAX_LINE_LENGTH 2048
 
 int main(int argc, char *argv[])
 {
