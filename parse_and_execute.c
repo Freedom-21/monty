@@ -3,6 +3,7 @@
 /**
  * parse_and_execute - Parses and executes Monty bytecode instructions
  * @stack: Double pointer to the head of the stack
+ * @line_number: line number in the monty bytecode file
  * @line: Pointer to the string to the monty bytecode instruction
  * Return: void
  */
@@ -17,6 +18,7 @@ void parse_and_execute(stack_t **stack, char *line, int line_number)
 		{"pall", pall},
 		{"pint", pint},
 		{"pop", pop},
+		{"swap", swap},
 		{NULL, NULL}
 	};
 	if (!line)

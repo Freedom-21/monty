@@ -45,5 +45,6 @@ void parse_and_execute(stack_t **stack, char *line, int line_number);
 void pint(stack_t **stack, unsigned int line_number);
 bool is_number(const char *str);
 void pop(stack_t **stack, unsigned int line_number);
+void swap(stack_t **stack, unsigned int line_number);
 
 #endif /* MONTY_H */
