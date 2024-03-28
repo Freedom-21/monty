@@ -7,10 +7,9 @@
  * Return: void
  */
 
-void parse_and_execute(stack_t **stack, char *line)
+void parse_and_execute(stack_t **stack, char *line, int line_number)
 {
 	char *opcode;
-	int line_number = 0;
 	instruction_t *inst;
 	int len;
 	instruction_t instructions[] = {

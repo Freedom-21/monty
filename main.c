@@ -11,6 +11,7 @@ int main(int argc, char *argv[])
 {
 	FILE *file;
 	char line[MAX_LINE_LENGTH];
+	int line_number = 0;
 
 	stack_t *stack = NULL;
 
@@ -29,7 +30,8 @@ int main(int argc, char *argv[])
 
 	while (fgets(line, MAX_LINE_LENGTH, file) != NULL)
 	{
-		parse_and_execute(&stack, line);
+		line_number++;
+		parse_and_execute(&stack, line, line_number);
 	}
 
 	fclose(file);
