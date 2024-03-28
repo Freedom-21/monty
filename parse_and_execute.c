@@ -19,6 +19,8 @@ void parse_and_execute(stack_t **stack, char *line, int line_number)
 		{"pint", pint},
 		{"pop", pop},
 		{"swap", swap},
+		{"add", add},
+		{"nop", nop},
 		{NULL, NULL}
 	};
 	if (!line)
@@ -34,6 +36,7 @@ void parse_and_execute(stack_t **stack, char *line, int line_number)
 	if (!opcode || opcode[0] == '#')
 		return;
 	line_number++;
+
 	for (inst = instructions; inst->opcode != NULL; inst++)
 	{
 		if (strcmp(opcode, inst->opcode) == 0)
