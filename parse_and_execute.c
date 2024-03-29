@@ -29,7 +29,6 @@ void parse_and_execute(stack_t **stack, char *line, int line_number)
 	if (*line == '\0' || *line == '#')
 		return;
 	opcode = strtok(line, " \t\n");
-	line_number++;
 
 	for (inst = instructions; inst->opcode != NULL; inst++)
 	{
