@@ -9,13 +9,15 @@
 
 bool is_number(const char *str)
 {
-	while (*str)
+	int i = 0;
+
+	if (str[0] == '-')
+		i = 1;
+
+	for (; str[i]; i++)
 	{
-		if (*str < '0' || *str > '9')
-		{
+		if (!isdigit(str[i]))
 			return (false);
-		}
-		str++;
 	}
 
 	return (true);
