@@ -10,7 +10,7 @@
 
 void parse_and_execute(stack_t **stack, char *line, int line_number)
 {
-	char *opcode;
+	char *opcode, *arg;
 	instruction_t *inst;
 	int len;
 	instruction_t instructions[] = {
@@ -41,6 +41,12 @@ void parse_and_execute(stack_t **stack, char *line, int line_number)
 	{
 		if (strcmp(opcode, inst->opcode) == 0)
 		{
+			if (strcmp(opcode, "push") == 0)
+			{
+				arg = strtok(NULL, " \t\n");
+				if(arg == NULL || !is_number(arg))
+					return;
+			}
 			inst->f(stack, line_number);
 			return;
 		}
