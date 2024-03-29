@@ -10,9 +10,8 @@
 
 void parse_and_execute(stack_t **stack, char *line, int line_number)
 {
-	char *opcode, *arg;
+	char *opcode;
 	instruction_t *inst;
-	int len;
 	instruction_t instructions[] = {
 		{"push", push},
 		{"pall", pall},
@@ -27,26 +26,15 @@ void parse_and_execute(stack_t **stack, char *line, int line_number)
 		return;
 	while (*line && isspace(*line))
 		line++;
-	len = strlen(line);
-	while (len > 0 && isspace(line[len - 1]))
-		line[--len] = '\0';
-	if (strlen(line) == 0)
+	if (*line == '\0' || *line == '#')
 		return;
 	opcode = strtok(line, " \t\n");
-	if (!opcode || opcode[0] == '#')
-		return;
 	line_number++;
 
 	for (inst = instructions; inst->opcode != NULL; inst++)
 	{
 		if (strcmp(opcode, inst->opcode) == 0)
 		{
-			if (strcmp(opcode, "push") == 0)
-			{
-				arg = strtok(NULL, " \t\n");
-				if(arg == NULL || !is_number(arg))
-					return;
-			}
 			inst->f(stack, line_number);
 			return;
 		}
